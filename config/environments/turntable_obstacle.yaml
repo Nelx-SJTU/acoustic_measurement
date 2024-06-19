@@ -1,0 +1,30 @@
+turntableBase:
+  type: cylinder
+  pose:
+    x: 1.0
+    y: 0.0
+    z: -0.66
+    rx: 0.0
+    ry: 0.0
+    rz: 0.0
+  size:
+    radius: 0.25
+    height: 0.14
+  collisions: true
+  robot_base_collisions: false
+
+turntableCenter:
+  type: cylinder
+  pose:
+    x: 1.0
+    y: 0.0
+    z: -0.61
+    rx: 0.0
+    ry: 0.0
+    rz: 0.0
+  size:
+    radius: 0.04
+    height: 0.24
+  collisions: true
+  robot_base_collisions: false
+

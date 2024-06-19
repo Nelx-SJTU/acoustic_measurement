@@ -1,21 +1,28 @@
+#!/home/student/anaconda3/envs/acoustic/bin/python
+
 # test_measurement_server_with_turntable.py
 import sys
 import os
+import rospy
 
 # 添加robot_arm_tools模块路径
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'robot_arm_tools', 'src', 'robot_arm_tools'))
+# sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'robot_arm_tools', 'src', 'robot_arm_tools'))
 
-from src.MeasurementServerWithTurntable import MeasurementServerWithTurntable
-
-
-def main():
-	# 初始化测量服务器
-	measurement_server = MeasurementServerWithTurntable()
-
-	# 模拟测量过程，并控制转台旋转
-	for _ in range(10):  # 测试循环10次，每次转动5度
-		measurement_server.measure()
-
+from acoustic_measurement.MeasurementServerWithTurntable import MeasurementServerWithTurntable
 
 if __name__ == "__main__":
-	main()
+    
+    #Launch ROS node
+    rospy.init_node('turntable_measurement_server')
+
+    #Launch ROS service
+    MeasurementServerWithTurntable(30)
+
+    while not rospy.is_shutdown():
+        try:
+            rospy.spin()
+        except KeyboardInterrupt:
+            print("Shutting down ROS sound measurement server")
+            break
+
+	
