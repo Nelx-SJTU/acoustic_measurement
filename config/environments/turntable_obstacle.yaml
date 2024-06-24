@@ -1,8 +1,8 @@
 turntable_with_model:
   type: mesh
-  file_name: package://acoustic_measurement/config/environments/turntable_with_model_scaled.stl
+  file_name: package://acoustic_measurement/config/environments/turntable_with_model.stl
   pose:
-    x: 1.0
+    x: 0.7
     y: 0.25
     z: -0.73
     rx: 1.57

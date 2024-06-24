@@ -2,11 +2,11 @@
 <launch>
 
     <!-- GENERAL ARGUMENTS -->
-    <arg name="robot_name" default="panda"/>
+    <arg name="robot_name" default="ur10e"/>
     <arg name="tool_name" default="none"/>
     <arg name="simulation" default="true"/>
     <arg name="calibration" default="false"/>
-    <arg name="safety_distance" default="0.03"/>
+    <arg name="safety_distance" default="0.05"/>
 
     <arg name="kinematics_solver" default="bio_ik/BioIKKinematicsPlugin"/>
 
@@ -31,9 +31,18 @@
     <param name="constrainedYaw" value="$(arg constrained_yaw)"/>
     <param name="visibilityConstraint" value="$(arg visibility_constraint)"/>
 
-    <node pkg="robot_arm_tools" type="robot_arm_tools_example_scan_node" name="robot_arm_tools_example_scan_node" output="screen" required="true"/>
+    <node pkg="acoustic_measurement" type="acoustic_measurement_step_node" name="acoustic_measurement_step_node" output="screen" required="true"/>
 
     <!-- RVIZ --> 
-    <!--<node type="rviz" name="rviz" pkg="rviz" args="-d $(find robot_arm_tools)/config/RViz/DefaultSetup.rviz"/> -->
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find robot_arm_tools)/config/RViz/DefaultSetup.rviz"/> -->
+
+    <!-- Robot arm environment node for the turntable -->
+    <node pkg="robot_arm_tools" type="robot_arm_tools_environment_node" name="robot_arm_tools_environment_obstacles" output="screen">
+        <param name="environmentFileName" value="/home/student/catkin_ws/src/robot_arm_tools/config/environments/Optitrack_ur10e.yaml"/>
+    </node>
+    
+    <node pkg="robot_arm_tools" type="robot_arm_tools_environment_node" name="robot_arm_tools_environment_node_turntable" output="screen">
+        <param name="environmentFileName" value="$(find acoustic_measurement)/config/environments/turntable_obstacle.yaml"/>
+    </node>
 
 </launch>
